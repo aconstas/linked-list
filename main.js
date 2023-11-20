@@ -1,3 +1,10 @@
+class Node {
+    constructor(value) {
+        this.value = value
+        this.nextNode = null;
+    }
+}
+
 class LinkedList {
     constructor() {
         this.head = null;
@@ -10,17 +17,17 @@ class LinkedList {
             this.head = newNode;
         } else {
             let current = this.head;
-            while (current.next) {
-                current = current.next;
+            while (current.nextNode) {
+                current = current.nextNode;
             }
-            current.next = newNode;
+            current.nextNode = newNode;
         }
         this.size++;
     }
 
     prepend(value) {
         const newNode = new Node(value);
-        newNode.next = this.head;
+        newNode.nextNode = this.head;
         this.head = newNode;
         this.size++;
     }
@@ -33,13 +40,13 @@ class LinkedList {
         return this.head;
     }
 
-    tail() {
+    getTail() {
         if(!this.head) {
             return null;
         }
         let current = this.head;
-        while (current.next) {
-            current = current.next;
+        while (current.nextNode) {
+            current = current.nextNode;
         }
         return current;
     }
@@ -53,7 +60,7 @@ class LinkedList {
         let currentIndex = 0;
 
         while (current !== null && currentIndex < index) {
-            current = current.next;
+            current = current.nextNode;
             currentIndex++;
         }
 
@@ -68,17 +75,17 @@ class LinkedList {
         if (!this.head) {
             return null;
         }
-        if (!this.head.next) {
+        if (!this.head.nextNode) {
             const valueToReturn = this.head.value;
             this.head = null;
             return valueToReturn;
         }
         let current = this.head;
-        while (current.next.next) {
-            current = current.next;
+        while (current.nextNode.nextNode) {
+            current = current.nextNode;
         }
-        const valueToReturn = current.next.value;
-        current.next = null;
+        const valueToReturn = current.nextNode.value;
+        current.nextNode = null;
         this.size--;
         return valueToReturn;
     }
@@ -94,7 +101,7 @@ class LinkedList {
             if (current.value === value) {
                 return true;
             }
-            current = current.next;
+            current = current.nextNode;
         }
 
         return false;
@@ -112,7 +119,7 @@ class LinkedList {
             if (current.value === value) {
                 return currentIndex;
             }
-            current = current.next;
+            current = current.nextNode;
             currentIndex++;
         }
 
@@ -127,19 +134,63 @@ class LinkedList {
         let current = this.head;
         while (current) {
             listString += `( ${current.value} ) -> `;
-            current = current.next;
+            current = current.nextNode;
         }
         return listString + 'null';
     }
 
-}
+    insertAt(value, index) {
+        if (index < 0 || index > this.size) {
+            throw new Error('Index out of bounds');
+        }
+        const newNode = new Node(value);
+        let current = this.head;
+        let currentIndex = 0;
+        // inserting new node at the head
+        if (index === 0 ) {
+            // assigning the newNode to point to the former head
+            newNode.nextNode = this.head;
+            // assigning the newNode as the linked lists new head
+            this.head = newNode;
+        }
+        while (current) {
+            if (currentIndex === index - 1) {
+                // the new value needs to point to the next node (the former value that was previously in the 'index')
+                newNode.nextNode = current.nextNode;
+                // the previous node needs to point to the new value ('value')
+                current.nextNode = newNode;
+                break;
+            }
+            
+            current = current.nextNode;
+            currentIndex++;
+        }
+        this.size++;
+    }
 
-class Node {
-    constructor(value) {
-        this.value = value
-        this.next = null;
+    removeAt(index) {
+        let currentIndex = 0;
+        let current = this.head;
+        if (index < 0 || index >= this.size) {
+            throw new Error('Index out of bounds');
+        }
+        if (index === 0) {
+            this.head = current.nextNode;
+        } else {
+            while(currentIndex < index) {
+                if (currentIndex === index - 1) {
+                    current.nextNode = current.nextNode.nextNode;
+                    break;
+                }
+                current = current.nextNode;
+                currentIndex++;
+            }
+        }
+        this.size--;
+        return firstList.toString();
     }
 }
+
 
 
 

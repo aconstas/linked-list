@@ -33,7 +33,7 @@ This structure allows for the _dispersed_ memory allocation of linked lists, wit
 - **prepend(value)**: adds a new node containing ```value``` to the start of the list
 - **getSize**: returns the total number of nodes in the list
 - **getHead**: returns the first node in the list
-- **tail**: returns the last node in the list
+- **getTail**: returns the last node in the list
 - **at(index)**: returns the node at the given ```index```
 - **pop**: removes the last element from the list
 - **contains(value)**: returns ```true``` if the passed-in value is in the list and otherwise returns ```false```.

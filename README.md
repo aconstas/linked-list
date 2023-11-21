@@ -39,3 +39,9 @@ This structure allows for the _dispersed_ memory allocation of linked lists, wit
 - **contains(value)**: returns ```true``` if the passed-in value is in the list and otherwise returns ```false```.
 - **find(value)**: returns the index of the node containing ```value```, or ```null``` if not found.
 - **toString**: returns the LinkedList objects as a single string in the format ```( value ) -> ( value ) -> ( value ) -> null```
+
+
+# To Use This Repository:
+- Clone the repository
+- change into the repository's directory (i.e ```cd \path\to\file```)
+- Ensure that node is installed and run the command ```node main.js```
